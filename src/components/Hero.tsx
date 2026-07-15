@@ -20,7 +20,7 @@ export default function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-fuchsia-400 opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-fuchsia-400" />
             </span>
-            Feito por um dev, para devs de verdade
+            Feito por devs, para devs.
           </div>
 
           <h1 className="text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-6xl">

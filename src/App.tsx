@@ -9,7 +9,7 @@ import Footer from "./components/Footer";
 
 const stats = [
   { value: "10x", label: "mais rápido em operações complexas" },
-  { value: "100%", label: "gratuito e de código aberto" },
+  { value: "100%", label: "gratuito" },
   { value: "3", label: "sistemas operacionais suportados" },
   { value: "0", label: "comandos decorados de cor" },
 ];

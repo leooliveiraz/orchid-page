@@ -71,12 +71,6 @@ export default function Navbar() {
         <div className="hidden items-center gap-3 lg:flex">
           <a
             href="#download"
-            className="rounded-full border border-white/15 px-4 py-2 text-sm font-semibold text-zinc-200 transition hover:border-white/30 hover:bg-white/5"
-          >
-            Ver no GitHub
-          </a>
-          <a
-            href="#download"
             className="rounded-full bg-gradient-to-r from-fuchsia-500 to-purple-600 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-fuchsia-500/25 transition hover:shadow-fuchsia-500/40 hover:brightness-110"
           >
             Baixar grátis

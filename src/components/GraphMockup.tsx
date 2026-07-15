@@ -1,6 +1,6 @@
 const commits = [
   { hash: "4ff43ba9", msg: "fix(styles): use color-mix for secondary", author: "orchid", tag: null, color: "bg-sky-400" },
-  { hash: "2baa8608", msg: "chore(release): version packages", author: "github-actions", tag: "v4.8.3", color: "bg-fuchsia-400" },
+  { hash: "2baa8608", msg: "chore(release): version packages", author: "ci-bot", tag: "v4.8.3", color: "bg-fuchsia-400" },
   { hash: "07900769", msg: "fix(cli): update template handling", author: "R. Aggarwal", tag: null, color: "bg-sky-400" },
   { hash: "360e8a19", msg: "fix(rebase): preserve quote style", author: "A. Konoplyov", tag: null, color: "bg-sky-400" },
   { hash: "55ea86f2", msg: "chore: update templates (#1078)", author: "orchid", tag: null, color: "bg-sky-400" },

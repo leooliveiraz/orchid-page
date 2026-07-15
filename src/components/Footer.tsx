@@ -5,7 +5,7 @@ const columns = [
   },
   {
     title: "Comunidade",
-    links: ["GitHub", "Discord", "Issues", "Discussões"],
+    links: ["Discord"],
   },
   {
     title: "Empresa",
@@ -31,7 +31,7 @@ export default function Footer() {
               O cliente Git visual feito por um dev, para devs. Commits, merges, rebase e cherry-picks — sem fricção.
             </p>
             <div className="mt-6 flex gap-3">
-              {["github", "x", "discord"].map((s) => (
+              {["x", "discord"].map((s) => (
                 <a
                   key={s}
                   href="#"
@@ -70,13 +70,6 @@ export default function Footer() {
 }
 
 function SocialIcon({ name }: { name: string }) {
-  if (name === "github") {
-    return (
-      <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
-        <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.72 1.27 3.39.97.1-.75.41-1.27.74-1.56-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 015.8 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.42.36.79 1.07.79 2.17v3.21c0 .31.21.66.79.55C20.71 21.38 24 17.07 24 12c0-6.35-5.15-11.5-12-11.5z" />
-      </svg>
-    );
-  }
   if (name === "x") {
     return (
       <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
