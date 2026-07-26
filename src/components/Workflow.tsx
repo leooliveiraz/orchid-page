@@ -76,27 +76,29 @@ export default function Workflow() {
             <button
               key={s.id}
               onClick={() => setActive(s.id)}
-              className={`rounded-full px-5 py-2.5 text-sm font-semibold transition ${
+              className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 ${
                 active === s.id
-                  ? "bg-gradient-to-r from-fuchsia-500 to-purple-600 text-white shadow-lg shadow-fuchsia-500/25"
-                  : "border border-white/10 text-zinc-400 hover:border-white/25 hover:text-white"
+                  ? "scale-105 bg-gradient-to-r from-fuchsia-500 to-purple-600 text-white shadow-lg shadow-fuchsia-500/25"
+                  : "border border-white/10 text-zinc-400 hover:scale-105 hover:border-white/25 hover:text-white"
               }`}
             >
-              {s.label}
+              {active === s.id ? "🌸 " : ""}{s.label}
             </button>
           ))}
         </div>
 
         <div className="mt-12 grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
-          <div>
+          <div className="animate-fade-in" key={current.id}>
             <h3 className="text-2xl font-bold text-white">{current.title}</h3>
             <p className="mt-3 text-zinc-400">{current.desc}</p>
 
-            <div className="mt-6 rounded-2xl border border-fuchsia-500/20 bg-fuchsia-500/[0.04] p-5">
-              <p className="mb-3 text-xs font-bold uppercase tracking-widest text-fuchsia-300">Com Orchid Git</p>
+            <div className="mt-6 rounded-2xl border border-fuchsia-500/20 bg-fuchsia-500/[0.04] p-5 transition-all hover:border-fuchsia-500/40">
+              <p className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-fuchsia-300">
+                <span>🌸</span> Com Orchid Git
+              </p>
               <ul className="space-y-2 text-sm text-zinc-200">
-                {current.orchid.map((line) => (
-                  <li key={line} className="flex items-start gap-2">
+                {current.orchid.map((line, i) => (
+                  <li key={line} className="flex items-start gap-2 animate-fade-in" style={{ animationDelay: `${i * 0.08}s` }}>
                     <span className="mt-0.5 text-fuchsia-400">{line.slice(0, 1)}</span>
                     <span>{line.slice(2)}</span>
                   </li>

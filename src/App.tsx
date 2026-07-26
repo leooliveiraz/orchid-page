@@ -4,6 +4,7 @@ import Features from "./components/Features";
 import Workflow from "./components/Workflow";
 import Comparison from "./components/Comparison";
 import Testimonials from "./components/Testimonials";
+import Donation from "./components/Donation";
 import Download from "./components/Download";
 import Footer from "./components/Footer";
 
@@ -42,6 +43,7 @@ export default function App() {
         <Workflow />
         <Comparison />
         <Testimonials />
+        <Donation />
         <Download />
       </main>
       <Footer />

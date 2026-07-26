@@ -1,12 +1,12 @@
 const rows = [
-  { label: "Grafo de branches interativo", orchid: true, others: "básico" },
-  { label: "Cherry-pick múltiplo em lote", orchid: true, others: false },
-  { label: "Rebase interativo com drag & drop", orchid: true, others: false },
-  { label: "Resolução visual de conflitos", orchid: true, others: "parcial" },
-  { label: "Multi-repositório num só painel", orchid: true, others: "parcial" },
-  { label: "Atalhos de teclado completos", orchid: true, others: "básico" },
-  { label: "Performance em repositórios grandes", orchid: true, others: "lento" },
-  { label: "Gratuito e leve", orchid: true, others: false },
+  { label: "🌳 Grafo de branches interativo", orchid: true, others: "⚠️ básico" },
+  { label: "🍒 Cherry-pick múltiplo em lote", orchid: true, others: false },
+  { label: "🔄 Rebase interativo com drag & drop", orchid: true, others: false },
+  { label: "🤝 Resolução visual de conflitos", orchid: true, others: "⚠️ parcial" },
+  { label: "📁 Multi-repositório num só painel", orchid: true, others: "⚠️ parcial" },
+  { label: "⌨️ Atalhos de teclado completos", orchid: true, others: "⚠️ básico" },
+  { label: "⚡ Performance em repositórios grandes", orchid: true, others: "🐢 lento" },
+  { label: "🔓 Gratuito e leve", orchid: true, others: false },
 ];
 
 function Cell({ value }: { value: boolean | string }) {

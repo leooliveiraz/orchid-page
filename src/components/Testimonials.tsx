@@ -44,43 +44,83 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
+  const duplicated = [...testimonials, ...testimonials];
+
   return (
     <section id="depoimentos" className="relative overflow-hidden py-28">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <span className="text-xs font-bold uppercase tracking-[0.2em] text-fuchsia-400">Depoimentos</span>
           <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
             Devs que trocaram de client e não olharam pra trás.
           </h2>
+          <p className="mt-4 text-lg text-zinc-400">
+            A melhor propaganda é quem usa no dia a dia. 💜
+          </p>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((t) => (
-            <div
-              key={t.name}
-              className="flex flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-fuchsia-500/30 hover:bg-white/[0.05]"
-            >
-              <div>
-                <div className="mb-4 flex gap-0.5 text-fuchsia-400">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <svg key={i} viewBox="0 0 20 20" className="h-4 w-4" fill="currentColor">
-                      <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
-                    </svg>
-                  ))}
-                </div>
-                <p className="text-sm leading-relaxed text-zinc-300">“{t.quote}”</p>
-              </div>
-              <div className="mt-6 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-fuchsia-500 to-purple-600 text-xs font-bold text-white">
-                  {t.initials}
-                </div>
+        {/* marquee row 1 */}
+        <div className="mt-16 flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+          <div className="flex animate-marquee gap-5">
+            {duplicated.map((t, i) => (
+              <div
+                key={`${t.name}-${i}`}
+                className="flex w-80 shrink-0 flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-fuchsia-500/30 hover:bg-white/[0.05] hover:shadow-lg hover:shadow-fuchsia-500/10"
+              >
                 <div>
-                  <p className="text-sm font-semibold text-white">{t.name}</p>
-                  <p className="text-xs text-zinc-500">{t.role}</p>
+                  <div className="mb-4 flex gap-0.5 text-fuchsia-400">
+                    {Array.from({ length: 5 }).map((_, si) => (
+                      <svg key={si} viewBox="0 0 20 20" className="h-4 w-4" fill="currentColor">
+                        <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                      </svg>
+                    ))}
+                  </div>
+                  <p className="text-sm leading-relaxed text-zinc-300">“{t.quote}”</p>
+                </div>
+                <div className="mt-6 flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-fuchsia-500 to-purple-600 text-xs font-bold text-white">
+                    {t.initials}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-white">{t.name}</p>
+                    <p className="text-xs text-zinc-500">{t.role}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        {/* marquee row 2 - reverse */}
+        <div className="mt-5 flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+          <div className="flex animate-marquee-reverse gap-5">
+            {duplicated.reverse().map((t, i) => (
+              <div
+                key={`rev-${t.name}-${i}`}
+                className="flex w-80 shrink-0 flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-fuchsia-500/30 hover:bg-white/[0.05] hover:shadow-lg hover:shadow-fuchsia-500/10"
+              >
+                <div>
+                  <div className="mb-4 flex gap-0.5 text-fuchsia-400">
+                    {Array.from({ length: 5 }).map((_, si) => (
+                      <svg key={si} viewBox="0 0 20 20" className="h-4 w-4" fill="currentColor">
+                        <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                      </svg>
+                    ))}
+                  </div>
+                  <p className="text-sm leading-relaxed text-zinc-300">“{t.quote}”</p>
+                </div>
+                <div className="mt-6 flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-fuchsia-500 to-purple-600 text-xs font-bold text-white">
+                    {t.initials}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-white">{t.name}</p>
+                    <p className="text-xs text-zinc-500">{t.role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
