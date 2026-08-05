@@ -47,13 +47,13 @@ export default function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-fuchsia-400 opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-fuchsia-400" />
             </span>
-            🌸 Feito por devs, para devs
+            🌸 De dev, para dev
           </div>
 
           <h1 className="animate-fade-in-up text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-6xl">
-            Git nunca foi tão
+            Usar o Git nunca foi
             <span className="block bg-gradient-to-r from-fuchsia-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent">
-              fácil de usar ✨
+              tão fácil ✨
             </span>
           </h1>
 
