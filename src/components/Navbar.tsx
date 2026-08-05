@@ -4,7 +4,6 @@ const links = [
   { label: "Recursos", href: "#recursos" },
   { label: "Fluxo de trabalho", href: "#fluxo" },
   { label: "Por que Orchid", href: "#comparativo" },
-  { label: "Depoimentos", href: "#depoimentos" },
   { label: "Download", href: "#download" },
 ];
 
