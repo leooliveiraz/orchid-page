@@ -20,8 +20,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-12 pb-12 sm:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-fuchsia-500 to-purple-600 text-lg">
-                🌸
+              <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-fuchsia-500 to-purple-600">
+                <img src="/images/icon.png" alt="Orchid Git" className="h-full w-full object-cover" />
               </div>
               <span className="text-lg font-extrabold text-white">
                 Orchid <span className="text-fuchsia-400">Git</span>

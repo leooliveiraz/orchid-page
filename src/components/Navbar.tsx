@@ -11,20 +11,9 @@ const links = [
 function OrchidMark({ className = "h-8 w-8" }: { className?: string }) {
   return (
     <div
-      className={`relative flex items-center justify-center rounded-xl bg-gradient-to-br from-fuchsia-500 via-purple-500 to-indigo-600 shadow-lg shadow-fuchsia-500/30 ${className}`}
+      className={`relative flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-fuchsia-500 via-purple-500 to-indigo-600 shadow-lg shadow-fuchsia-500/30 ${className}`}
     >
-      <svg viewBox="0 0 24 24" className="h-[60%] w-[60%] text-white" fill="none">
-        <path
-          d="M12 3c1.8 1.6 2.6 3.3 2.6 5.1 0 1.8-1.1 3-2.6 3s-2.6-1.2-2.6-3C9.4 6.3 10.2 4.6 12 3Z"
-          fill="currentColor"
-        />
-        <path
-          d="M12 11.1c2.3.3 4.1 1.2 5.2 2.7 1.1 1.5 1.2 3.2.4 4.5-.9 1.3-2.7 1.5-4.4.6-1.7-.9-2.9-2.7-3.2-5 -.3 2.3-1.5 4.1-3.2 5-1.7.9-3.5.7-4.4-.6-.8-1.3-.7-3 .4-4.5 1.1-1.5 2.9-2.4 5.2-2.7Z"
-          fill="currentColor"
-          opacity="0.85"
-        />
-        <circle cx="12" cy="12.2" r="1.4" fill="#0b0a10" />
-      </svg>
+      <img src="/images/icon.png" alt="Orchid Git" className="h-full w-full object-cover" />
     </div>
   );
 }
