@@ -8,10 +8,10 @@ const links = [
   { label: "Download", href: "#download" },
 ];
 
-function OrchidMark({ className = "h-8 w-8" }: { className?: string }) {
+function OrchidMark({ className = "h-10 w-10" }: { className?: string }) {
   return (
     <div
-      className={`relative flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-fuchsia-500 via-purple-500 to-indigo-600 shadow-lg shadow-fuchsia-500/30 ${className}`}
+      className={`relative flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-fuchsia-500 via-purple-500 to-indigo-600 p-1.5 shadow-lg shadow-fuchsia-500/30 ${className}`}
     >
       <img src="/images/icon.png" alt="Orchid Git" className="h-full w-full object-cover" />
     </div>
