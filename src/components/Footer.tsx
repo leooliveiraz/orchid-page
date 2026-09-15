@@ -10,13 +10,7 @@ const columns: { title: string; links: FooterLink[] }[] = [
       { label: "Recursos", to: "/#recursos" },
       { label: "Fluxo de trabalho", to: "/#fluxo" },
       { label: "Comparativo", to: "/#comparativo" },
-      { label: "Changelog" },
-      { label: "Roadmap" },
     ],
-  },
-  {
-    title: "Comunidade",
-    links: [{ label: "Discord" }],
   },
   {
     title: "Empresa",
@@ -36,14 +30,13 @@ function handleHash(to: string) {
 
 const socials = [
   { name: "x", label: "X (Twitter)", href: "https://x.com/OrchidGit" },
-  { name: "discord", label: "Discord", href: "#" },
 ];
 
 export default function Footer() {
   return (
     <footer className="relative border-t border-white/10 bg-black/40 pt-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 pb-12 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="grid grid-cols-1 gap-12 pb-12 sm:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3">
               <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-fuchsia-500 to-purple-600 p-1">
