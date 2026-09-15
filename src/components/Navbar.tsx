@@ -44,6 +44,13 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
@@ -92,7 +99,9 @@ export default function Navbar() {
         <button
           onClick={() => setOpen((v) => !v)}
           className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-white lg:hidden"
-          aria-label="Abrir menu"
+          aria-label={open ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
         >
           <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2}>
             {open ? (
@@ -105,7 +114,7 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div className="border-t border-white/10 bg-black/95 px-6 py-4 lg:hidden">
+        <div id="mobile-menu" className="border-t border-white/10 bg-black/95 px-6 py-4 lg:hidden">
           <div className="flex flex-col gap-4">
             {links.map((link) => (
               <a
