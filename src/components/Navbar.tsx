@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { scrollToId } from "../utils/scroll";
 
 const links = [
-  { label: "Recursos", href: "#recursos" },
-  { label: "Fluxo de trabalho", href: "#fluxo" },
-  { label: "Por que Orchid", href: "#comparativo" },
-  { label: "Download", href: "#download" },
+  { label: "Recursos", to: "/#recursos" },
+  { label: "Fluxo de trabalho", to: "/#fluxo" },
+  { label: "Por que Orchid", to: "/#comparativo" },
+  { label: "Download", to: "/#download" },
 ];
 
 function OrchidMark({ className = "h-10 w-10" }: { className?: string }) {
@@ -18,6 +20,8 @@ function OrchidMark({ className = "h-10 w-10" }: { className?: string }) {
 }
 
 export default function Navbar() {
+  const { pathname } = useLocation();
+  const onHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
@@ -31,18 +35,24 @@ export default function Navbar() {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       setProgress(max > 0 ? Math.min(1, scrollY / max) : 0);
 
+      if (!onHome) {
+        setActive("");
+        return;
+      }
+
       const threshold = scrollY + 140;
       let current = "";
       for (const link of links) {
-        const el = document.querySelector<HTMLElement>(link.href);
-        if (el && el.offsetTop <= threshold) current = link.href;
+        const id = link.to.split("#")[1];
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= threshold) current = link.to;
       }
       setActive(current);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [onHome]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -50,6 +60,12 @@ export default function Navbar() {
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  const handleNav = (to: string) => {
+    setOpen(false);
+    const id = to.split("#")[1];
+    if (id) requestAnimationFrame(() => scrollToId(id));
+  };
 
   return (
     <header
@@ -65,35 +81,37 @@ export default function Navbar() {
         aria-hidden="true"
       />
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-        <a href="#top" className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3" onClick={() => handleNav("/#top")}>
           <OrchidMark />
           <span className="text-lg font-extrabold tracking-tight text-white">
             Orchid <span className="text-fuchsia-400">Git</span>
           </span>
-        </a>
+        </Link>
 
         <div className="hidden items-center gap-8 lg:flex">
           {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              aria-current={active === link.href ? "true" : undefined}
+            <Link
+              key={link.to}
+              to={link.to}
+              onClick={() => handleNav(link.to)}
+              aria-current={active === link.to ? "true" : undefined}
               className={`text-sm font-medium transition ${
-                active === link.href ? "text-white" : "text-zinc-400 hover:text-white"
+                active === link.to ? "text-white" : "text-zinc-400 hover:text-white"
               }`}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <a
-            href="#download"
+          <Link
+            to="/#download"
+            onClick={() => handleNav("/#download")}
             className="rounded-full bg-gradient-to-r from-fuchsia-500 to-purple-600 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-fuchsia-500/25 transition hover:shadow-fuchsia-500/40 hover:brightness-110"
           >
             Baixar grátis
-          </a>
+          </Link>
         </div>
 
         <button
@@ -117,25 +135,25 @@ export default function Navbar() {
         <div id="mobile-menu" className="border-t border-white/10 bg-black/95 px-6 py-4 lg:hidden">
           <div className="flex flex-col gap-4">
             {links.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                aria-current={active === link.href ? "true" : undefined}
+              <Link
+                key={link.to}
+                to={link.to}
+                onClick={() => handleNav(link.to)}
+                aria-current={active === link.to ? "true" : undefined}
                 className={`text-sm font-medium ${
-                  active === link.href ? "text-white" : "text-zinc-300 hover:text-white"
+                  active === link.to ? "text-white" : "text-zinc-300 hover:text-white"
                 }`}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
-            <a
-              href="#download"
-              onClick={() => setOpen(false)}
+            <Link
+              to="/#download"
+              onClick={() => handleNav("/#download")}
               className="mt-2 rounded-full bg-gradient-to-r from-fuchsia-500 to-purple-600 px-5 py-2.5 text-center text-sm font-semibold text-white"
             >
               Baixar grátis
-            </a>
+            </Link>
           </div>
         </div>
       )}

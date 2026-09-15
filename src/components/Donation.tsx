@@ -67,7 +67,7 @@ export default function Donation() {
               </ul>
 
               <p className="mt-8 text-sm text-zinc-400">
-                Feito com 💜 por devs, para devs. Nada aqui é obrigatório — só gratidão mesmo.
+                Feito com 💜 de dev, para dev. Nada aqui é obrigatório — só gratidão mesmo.
               </p>
             </div>
 

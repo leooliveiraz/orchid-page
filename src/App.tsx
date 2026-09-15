@@ -1,51 +1,25 @@
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Features from "./components/Features";
-import Workflow from "./components/Workflow";
-import Comparison from "./components/Comparison";
-import Donation from "./components/Donation";
-import Download from "./components/Download";
-import Footer from "./components/Footer";
-import BackToTop from "./components/BackToTop";
-
-const stats = [
-  { value: "10x", label: "mais rápido em operações complexas" },
-  { value: "100%", label: "gratuito" },
-  { value: "0", label: "comandos decorados de cor" },
-];
-
-function StatsBar() {
-  return (
-    <section className="relative border-y border-white/10 bg-white/[0.02] py-12">
-      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-6 lg:grid-cols-3 lg:px-8">
-        {stats.map((s) => (
-          <div key={s.label} className="text-center">
-            <p className="bg-gradient-to-r from-fuchsia-400 to-purple-400 bg-clip-text text-3xl font-extrabold text-transparent sm:text-4xl">
-              {s.value}
-            </p>
-            <p className="mt-2 text-xs font-medium leading-snug text-zinc-500 sm:text-sm">{s.label}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import License from "./pages/License";
+import Privacy from "./pages/Privacy";
+import NotFound from "./pages/NotFound";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#08070b] text-white antialiased selection:bg-fuchsia-500/30">
-      <Navbar />
-      <main>
-        <Hero />
-        <StatsBar />
-        <Features />
-        <Workflow />
-        <Comparison />
-        <Donation />
-        <Download />
-      </main>
-      <Footer />
-      <BackToTop />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/sobre" element={<About />} />
+          <Route path="/contato" element={<Contact />} />
+          <Route path="/licenca" element={<License />} />
+          <Route path="/privacidade" element={<Privacy />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }

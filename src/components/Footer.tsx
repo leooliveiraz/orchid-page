@@ -1,16 +1,42 @@
-const columns = [
+import { Link } from "react-router-dom";
+import { scrollToId } from "../utils/scroll";
+
+type FooterLink = { label: string; to?: string };
+
+const columns: { title: string; links: FooterLink[] }[] = [
   {
     title: "Produto",
-    links: ["Recursos", "Fluxo de trabalho", "Comparativo", "Changelog", "Roadmap"],
+    links: [
+      { label: "Recursos", to: "/#recursos" },
+      { label: "Fluxo de trabalho", to: "/#fluxo" },
+      { label: "Comparativo", to: "/#comparativo" },
+      { label: "Changelog" },
+      { label: "Roadmap" },
+    ],
   },
   {
     title: "Comunidade",
-    links: ["Discord"],
+    links: [{ label: "Discord" }],
   },
   {
     title: "Empresa",
-    links: ["Sobre", "Contato", "Licença", "Privacidade"],
+    links: [
+      { label: "Sobre", to: "/sobre" },
+      { label: "Contato", to: "/contato" },
+      { label: "Licença", to: "/licenca" },
+      { label: "Privacidade", to: "/privacidade" },
+    ],
   },
+];
+
+function handleHash(to: string) {
+  const id = to.split("#")[1];
+  if (id) requestAnimationFrame(() => scrollToId(id));
+}
+
+const socials = [
+  { name: "x", label: "X (Twitter)", href: "https://x.com/OrchidGit" },
+  { name: "discord", label: "Discord", href: "#" },
 ];
 
 export default function Footer() {
@@ -31,17 +57,25 @@ export default function Footer() {
               O cliente Git visual feito por um dev, para devs. Commits, merges, rebase e cherry-picks — sem fricção.
             </p>
             <div className="mt-6 flex gap-3">
-              {["x", "discord"].map((s) => (
+              {socials.map((s) => (
                 <a
-                  key={s}
-                  href="#"
+                  key={s.name}
+                  href={s.href}
                   className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-zinc-400 transition hover:border-fuchsia-400/40 hover:text-fuchsia-300"
-                  aria-label={s}
+                  aria-label={s.label}
+                  {...(s.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 >
-                  <SocialIcon name={s} />
+                  <SocialIcon name={s.name} />
                 </a>
               ))}
             </div>
+            <a
+              href="mailto:contact@orchidgit.com"
+              className="mt-6 inline-flex items-center gap-2 text-sm text-zinc-400 transition hover:text-fuchsia-300"
+            >
+              <MailIcon />
+              contact@orchidgit.com
+            </a>
           </div>
 
           {columns.map((col) => (
@@ -49,10 +83,20 @@ export default function Footer() {
               <p className="text-sm font-bold text-white">{col.title}</p>
               <ul className="mt-4 space-y-3">
                 {col.links.map((link) => (
-                  <li key={link}>
-                    <a href="#" className="text-sm text-zinc-500 transition hover:text-fuchsia-300">
-                      {link}
-                    </a>
+                  <li key={link.label}>
+                    {link.to ? (
+                      <Link
+                        to={link.to}
+                        onClick={() => handleHash(link.to!)}
+                        className="text-sm text-zinc-500 transition hover:text-fuchsia-300"
+                      >
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <a href="#" className="text-sm text-zinc-500 transition hover:text-fuchsia-300">
+                        {link.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -61,11 +105,27 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col items-center justify-between gap-4 border-t border-white/10 py-8 text-xs text-zinc-600 sm:flex-row">
-          <p>© {new Date().getFullYear()} Orchid Git. Feito com 🌸 por devs, para devs.</p>
+          <p>© {new Date().getFullYear()} Orchid Git. Feito com 💜 de dev, para dev.</p>
           <p>Construído com React, Vite &amp; Tailwind CSS.</p>
         </div>
       </div>
     </footer>
+  );
+}
+
+function MailIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-4 w-4"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      aria-hidden="true"
+    >
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="m3 7 9 6 9-6" />
+    </svg>
   );
 }
 
