@@ -95,6 +95,23 @@ body {
   animation: fade-in 0.5s ease-out forwards;
 }
 
+@keyframes icon-swap-a {
+  0%, 38% { opacity: 1; transform: scale(1) rotate(0deg); }
+  50%, 88% { opacity: 0; transform: scale(0.6) rotate(-90deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+@keyframes icon-swap-b {
+  0%, 38% { opacity: 0; transform: scale(0.6) rotate(90deg); }
+  50%, 88% { opacity: 1; transform: scale(1) rotate(0deg); }
+  100% { opacity: 0; transform: scale(0.6) rotate(90deg); }
+}
+.animate-icon-swap-a {
+  animation: icon-swap-a 6s ease-in-out infinite;
+}
+.animate-icon-swap-b {
+  animation: icon-swap-b 6s ease-in-out infinite;
+}
+
 @keyframes twinkle {
   0%, 100% { opacity: 0.15; transform: scale(0.8); }
   50% { opacity: 0.6; transform: scale(1.2); }

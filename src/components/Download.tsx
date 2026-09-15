@@ -1,12 +1,50 @@
-const platforms = [
+import type { ComponentType } from "react";
+import { DebianIcon, FedoraIcon, RedHatIcon, UbuntuIcon, WindowsIcon, type IconProps } from "./Icons";
+
+const RELEASES_URL = "https://github.com/leooliveiraz/orchid-page/releases";
+const LATEST_DOWNLOAD_URL = `${RELEASES_URL}/latest/download`;
+
+type Platform = {
+  name: string;
+  detail: string;
+  url: string;
+  icon: ComponentType<IconProps>;
+  swapWith?: ComponentType<IconProps>;
+};
+
+const platforms: Platform[] = [
   {
     name: "Windows",
-    detail: ".exe · winget",
-    icon: (
-      <path d="M3 5.5L10.5 4.4V11.3H3V5.5ZM11.4 4.3L21 3V11.2H11.4V4.3ZM3 12.2H10.5V19.1L3 18V12.2ZM11.4 12.2H21V20.5L11.4 19.2V12.2Z" />
-    ),
+    detail: ".exe · instalador",
+    url: `${LATEST_DOWNLOAD_URL}/Orchid-Git-Setup.exe`,
+    icon: WindowsIcon,
+  },
+  {
+    name: "Linux · deb",
+    detail: "Debian, Ubuntu e derivados",
+    url: `${LATEST_DOWNLOAD_URL}/orchid-git-amd64.deb`,
+    icon: DebianIcon,
+    swapWith: UbuntuIcon,
+  },
+  {
+    name: "Linux · rpm",
+    detail: "Fedora, RHEL e derivados",
+    url: `${LATEST_DOWNLOAD_URL}/orchid-git-x86_64.rpm`,
+    icon: FedoraIcon,
+    swapWith: RedHatIcon,
   },
 ];
+
+const ICON_CLASS = "h-8 w-8 text-white transition group-hover:scale-110 group-hover:text-fuchsia-300";
+
+function DistroSwapIcon({ a: IconA, b: IconB }: { a: ComponentType<IconProps>; b: ComponentType<IconProps> }) {
+  return (
+    <span className="relative block h-8 w-8 text-white transition group-hover:scale-110 group-hover:text-fuchsia-300">
+      <IconA className="animate-icon-swap-a absolute inset-0 h-8 w-8" />
+      <IconB className="animate-icon-swap-b absolute inset-0 h-8 w-8" />
+    </span>
+  );
+}
 
 export default function Download() {
   return (
@@ -18,7 +56,7 @@ export default function Download() {
 
           <div className="relative">
             <span className="animate-pulse-glow inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/20 px-4 py-1.5 text-xs font-bold text-fuchsia-300">
-              🌸 v1.0.0 — lançamento oficial
+              🌸 v0.9.8 — lançamento oficial
             </span>
             <h2 className="mx-auto mt-6 max-w-2xl text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
               Chega de sofrer no terminal. 💔
@@ -31,23 +69,32 @@ export default function Download() {
               Testa que você não vai querer voltar atrás. 💜
             </p>
 
-            <div className="mt-10 flex justify-center">
-              {platforms.map((p, i) => (
-                <button
-                  key={p.name}
-                  className="group animate-fade-in-up flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-6 text-left opacity-0 transition-all duration-300 hover:-translate-y-1 hover:border-fuchsia-400/40 hover:bg-white/10 hover:shadow-lg hover:shadow-fuchsia-500/20"
-                  style={{ animationDelay: `${i * 0.12}s` }}
-                >
-                  <svg viewBox="0 0 24 24" className="h-8 w-8 text-white transition group-hover:scale-110 group-hover:text-fuchsia-300" fill="currentColor">
-                    {p.icon}
-                  </svg>
-                  <div className="text-center">
-                    <p className="text-sm font-bold text-white group-hover:text-fuchsia-200">{p.name}</p>
-                    <p className="text-xs text-zinc-400">{p.detail}</p>
-                  </div>
-                </button>
-              ))}
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
+              {platforms.map((p, i) => {
+                const Icon = p.icon;
+                return (
+                  <a
+                    key={p.name}
+                    href={p.url}
+                    className="group animate-fade-in-up flex w-52 flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-6 text-left opacity-0 transition-all duration-300 hover:-translate-y-1 hover:border-fuchsia-400/40 hover:bg-white/10 hover:shadow-lg hover:shadow-fuchsia-500/20"
+                    style={{ animationDelay: `${i * 0.12}s` }}
+                  >
+                    {p.swapWith ? <DistroSwapIcon a={Icon} b={p.swapWith} /> : <Icon className={ICON_CLASS} />}
+                    <div className="text-center">
+                      <p className="text-sm font-bold text-white group-hover:text-fuchsia-200">{p.name}</p>
+                      <p className="text-xs text-zinc-400">{p.detail}</p>
+                    </div>
+                  </a>
+                );
+              })}
             </div>
+
+            <p className="mt-6 text-xs text-zinc-500">
+              Sempre baixa a versão mais recente ·{" "}
+              <a href={RELEASES_URL} className="font-semibold text-fuchsia-300 underline-offset-4 transition hover:text-fuchsia-200 hover:underline">
+                ver todas as versões
+              </a>
+            </p>
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs text-zinc-500">
               <span className="flex items-center gap-1.5">🔓 Sem cartão de crédito</span>
