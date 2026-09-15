@@ -1,13 +1,17 @@
-import type { ComponentType } from "react";
+import { useEffect, useState, type ComponentType } from "react";
 import { DebianIcon, FedoraIcon, RedHatIcon, UbuntuIcon, WindowsIcon, type IconProps } from "./Icons";
 
+const LATEST_VERSION = "v0.9.8";
 const RELEASES_URL = "https://github.com/leooliveiraz/orchid-page/releases";
 const LATEST_DOWNLOAD_URL = `${RELEASES_URL}/latest/download`;
+
+type PlatformOS = "windows" | "linux";
 
 type Platform = {
   name: string;
   detail: string;
   url: string;
+  os: PlatformOS;
   icon: ComponentType<IconProps>;
   swapWith?: ComponentType<IconProps>;
 };
@@ -17,12 +21,14 @@ const platforms: Platform[] = [
     name: "Windows",
     detail: ".exe · instalador",
     url: `${LATEST_DOWNLOAD_URL}/Orchid-Git-Setup.exe`,
+    os: "windows",
     icon: WindowsIcon,
   },
   {
     name: "Linux · deb",
     detail: "Debian, Ubuntu e derivados",
     url: `${LATEST_DOWNLOAD_URL}/orchid-git-amd64.deb`,
+    os: "linux",
     icon: DebianIcon,
     swapWith: UbuntuIcon,
   },
@@ -30,6 +36,7 @@ const platforms: Platform[] = [
     name: "Linux · rpm",
     detail: "Fedora, RHEL e derivados",
     url: `${LATEST_DOWNLOAD_URL}/orchid-git-x86_64.rpm`,
+    os: "linux",
     icon: FedoraIcon,
     swapWith: RedHatIcon,
   },
@@ -46,7 +53,25 @@ function DistroSwapIcon({ a: IconA, b: IconB }: { a: ComponentType<IconProps>; b
   );
 }
 
+function detectOS(): PlatformOS | null {
+  if (typeof navigator === "undefined") return null;
+  const ua = `${navigator.userAgent} ${navigator.platform ?? ""}`.toLowerCase();
+  if (ua.includes("win")) return "windows";
+  if (ua.includes("linux") || ua.includes("x11")) return "linux";
+  return null;
+}
+
 export default function Download() {
+  const [os, setOs] = useState<PlatformOS | null>(null);
+
+  useEffect(() => {
+    setOs(detectOS());
+  }, []);
+
+  const orderedPlatforms = os
+    ? [...platforms].sort((a, b) => Number(b.os === os) - Number(a.os === os))
+    : platforms;
+
   return (
     <section id="download" className="relative py-28">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
@@ -56,7 +81,7 @@ export default function Download() {
 
           <div className="relative">
             <span className="animate-pulse-glow inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/20 px-4 py-1.5 text-xs font-bold text-fuchsia-300">
-              🌸 v0.9.8 — lançamento oficial
+              🌸 {LATEST_VERSION} — lançamento oficial
             </span>
             <h2 className="mx-auto mt-6 max-w-2xl text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
               Chega de sofrer no terminal. 💔
@@ -70,15 +95,25 @@ export default function Download() {
             </p>
 
             <div className="mt-10 flex flex-wrap justify-center gap-4">
-              {platforms.map((p, i) => {
+              {orderedPlatforms.map((p, i) => {
                 const Icon = p.icon;
+                const recommended = os !== null && i === 0;
                 return (
                   <a
                     key={p.name}
                     href={p.url}
-                    className="group animate-fade-in-up flex w-52 flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-6 text-left opacity-0 transition-all duration-300 hover:-translate-y-1 hover:border-fuchsia-400/40 hover:bg-white/10 hover:shadow-lg hover:shadow-fuchsia-500/20"
+                    className={`group animate-fade-in-up relative flex w-52 flex-col items-center gap-3 rounded-2xl border px-6 py-6 text-left opacity-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-fuchsia-500/20 ${
+                      recommended
+                        ? "border-fuchsia-400/60 bg-fuchsia-500/10 hover:border-fuchsia-300/70"
+                        : "border-white/10 bg-white/5 hover:border-fuchsia-400/40 hover:bg-white/10"
+                    }`}
                     style={{ animationDelay: `${i * 0.12}s` }}
                   >
+                    {recommended && (
+                      <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-fuchsia-500 to-purple-600 px-3 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+                        Recomendado
+                      </span>
+                    )}
                     {p.swapWith ? <DistroSwapIcon a={Icon} b={p.swapWith} /> : <Icon className={ICON_CLASS} />}
                     <div className="text-center">
                       <p className="text-sm font-bold text-white group-hover:text-fuchsia-200">{p.name}</p>
@@ -89,12 +124,7 @@ export default function Download() {
               })}
             </div>
 
-            <p className="mt-6 text-xs text-zinc-500">
-              Sempre baixa a versão mais recente ·{" "}
-              <a href={RELEASES_URL} className="font-semibold text-fuchsia-300 underline-offset-4 transition hover:text-fuchsia-200 hover:underline">
-                ver todas as versões
-              </a>
-            </p>
+            <p className="mt-6 text-xs text-zinc-500">Você sempre baixa a versão mais recente.</p>
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs text-zinc-500">
               <span className="flex items-center gap-1.5">🔓 Sem cartão de crédito</span>
@@ -103,16 +133,6 @@ export default function Download() {
               <span className="flex items-center gap-1.5">🌸 Mantido com carinho</span>
             </div>
           </div>
-        </div>
-
-        {/* trust bar */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-xs text-zinc-600">
-          <span>Usado por devs da →</span>
-          <span className="font-semibold text-zinc-500">Nubank</span>
-          <span className="font-semibold text-zinc-500">VTEX</span>
-          <span className="font-semibold text-zinc-500">QuiD</span>
-          <span className="font-semibold text-zinc-500">Trybe</span>
-          <span className="font-semibold text-zinc-500">e mais</span>
         </div>
       </div>
     </section>
