@@ -88,29 +88,12 @@ export default function Hero() {
           </div>
 
           <div className="animate-fade-in-up mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-xs font-medium text-zinc-500" style={{ animationDelay: "0.3s" }}>
-            <span className="flex items-center gap-1.5"><CheckIcon /> Windows, macOS &amp; Linux</span>
+            <span className="flex items-center gap-1.5"><CheckIcon /> Windows &amp; Linux</span>
             <span className="flex items-center gap-1.5"><CheckIcon /> Rebase interativo</span>
             <span className="flex items-center gap-1.5"><CheckIcon /> Cherry-pick múltiplo</span>
             <span className="flex items-center gap-1.5"><CheckIcon /> 100% gratuito</span>
           </div>
 
-          {/* social proof */}
-          <div className="animate-fade-in-up mt-8 flex flex-wrap items-center justify-center gap-6 rounded-2xl border border-white/5 bg-white/[0.02] px-6 py-3 text-xs text-zinc-500" style={{ animationDelay: "0.35s" }}>
-            <span className="flex items-center gap-1.5">
-              <span className="flex -space-x-2">
-                {["👩", "👨", "🧑", "👩", "👨"].map((emoji, i) => (
-                  <span key={i} className="inline-block animate-float" style={{ animationDelay: `${i * 0.3}s`, animationDuration: "3s" }}>
-                    {emoji}
-                  </span>
-                ))}
-              </span>
-              <span><strong className="text-zinc-300">10.000+</strong> devs já usam</span>
-            </span>
-            <span className="hidden sm:inline">·</span>
-            <span>⭐ <strong className="text-zinc-300">4.9</strong> de satisfação</span>
-            <span className="hidden sm:inline">·</span>
-            <span>🔓 100% gratuito</span>
-          </div>
         </div>
 
         {/* showcase mockup */}
