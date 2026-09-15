@@ -3,17 +3,29 @@ const features = [
     title: "🌳 Grafo de commits interativo",
     desc: "Visualize toda a árvore de branches, merges e tags em um grafo fluido, com zoom, filtros e ordenação topológica.",
     icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M6 3v10a4 4 0 004 4h4M6 3a2 2 0 100 4 2 2 0 000-4zm12 14a2 2 0 100 4 2 2 0 000-4zm0-10a2 2 0 100 4 2 2 0 000-4z"
-      />
+      <>
+        <circle cx="5" cy="6" r="3" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5 9v6" />
+        <circle cx="5" cy="18" r="3" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v18" />
+        <circle cx="19" cy="6" r="3" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M16 15.7A9 9 0 0 0 19 9" />
+      </>
     ),
   },
   {
     title: "🍒 Cherry-pick múltiplo",
     desc: "Selecione vários commits de branches diferentes e aplique tudo de uma vez, sem repetir o comando um por um.",
-    icon: <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v6m0 0a3 3 0 100 6 3 3 0 000-6zm0 6v6m6-15a3 3 0 11-6 0 3 3 0 016 0z" />,
+    icon: (
+      <>
+        <circle cx="6" cy="6" r="3" />
+        <circle cx="6" cy="18" r="3" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6 9v6" />
+        <circle cx="18" cy="12" r="3" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12h-3" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9l-3 3 3 3" />
+      </>
+    ),
   },
   {
     title: "🔄 Rebase interativo visual",
@@ -23,7 +35,13 @@ const features = [
   {
     title: "🤝 Merge sem sustos",
     desc: "Resolva conflitos com um editor lado a lado, destacando exatamente o que mudou em cada branch.",
-    icon: <path strokeLinecap="round" strokeLinejoin="round" d="M8 7a3 3 0 100-6 3 3 0 000 6zm0 0v6a4 4 0 004 4h1m4-10a3 3 0 100-6 3 3 0 000 6zm0 0v3" />,
+    icon: (
+      <>
+        <circle cx="18" cy="18" r="3" />
+        <circle cx="6" cy="6" r="3" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6 21V9a9 9 0 0 0 9 9" />
+      </>
+    ),
   },
   {
     title: "⚡ Checkout instantâneo",
