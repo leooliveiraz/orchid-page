@@ -1,0 +1,27 @@
+{
+  "name": "Orchid Git",
+  "short_name": "Orchid Git",
+  "description": "Orchid Git é o cliente Git visual e elegante para acelerar seu fluxo de trabalho: commits, merges, rebase interativo, cherry-pick múltiplo e muito mais.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#08070b",
+  "theme_color": "#08070b",
+  "icons": [
+    {
+      "src": "/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
