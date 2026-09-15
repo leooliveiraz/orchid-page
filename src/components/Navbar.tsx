@@ -20,11 +20,27 @@ function OrchidMark({ className = "h-10 w-10" }: { className?: string }) {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("");
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => {
+      const scrollY = window.scrollY;
+      setScrolled(scrollY > 12);
+
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(max > 0 ? Math.min(1, scrollY / max) : 0);
+
+      const threshold = scrollY + 140;
+      let current = "";
+      for (const link of links) {
+        const el = document.querySelector<HTMLElement>(link.href);
+        if (el && el.offsetTop <= threshold) current = link.href;
+      }
+      setActive(current);
+    };
     onScroll();
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -36,6 +52,11 @@ export default function Navbar() {
           : "bg-transparent border-b border-transparent"
       }`}
     >
+      <div
+        className="absolute inset-x-0 top-0 h-0.5 origin-left bg-gradient-to-r from-fuchsia-500 via-purple-500 to-indigo-500"
+        style={{ transform: `scaleX(${progress})` }}
+        aria-hidden="true"
+      />
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
         <a href="#top" className="flex items-center gap-3">
           <OrchidMark />
@@ -49,7 +70,10 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-zinc-400 transition hover:text-white"
+              aria-current={active === link.href ? "true" : undefined}
+              className={`text-sm font-medium transition ${
+                active === link.href ? "text-white" : "text-zinc-400 hover:text-white"
+              }`}
             >
               {link.label}
             </a>
@@ -88,7 +112,10 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="text-sm font-medium text-zinc-300 hover:text-white"
+                aria-current={active === link.href ? "true" : undefined}
+                className={`text-sm font-medium ${
+                  active === link.href ? "text-white" : "text-zinc-300 hover:text-white"
+                }`}
               >
                 {link.label}
               </a>

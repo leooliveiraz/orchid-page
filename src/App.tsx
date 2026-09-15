@@ -6,6 +6,7 @@ import Comparison from "./components/Comparison";
 import Donation from "./components/Donation";
 import Download from "./components/Download";
 import Footer from "./components/Footer";
+import BackToTop from "./components/BackToTop";
 
 const stats = [
   { value: "10x", label: "mais rápido em operações complexas" },
@@ -44,6 +45,7 @@ export default function App() {
         <Download />
       </main>
       <Footer />
+      <BackToTop />
     </div>
   );
 }
