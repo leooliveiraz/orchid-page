@@ -81,7 +81,7 @@ export default function Features() {
             Tudo que seu Git precisava e faltava.
           </h2>
           <p className="mt-4 text-lg text-zinc-400">
-            Cada operação do dia a dia repensada como uma experiência visual, rápida e sem fricção.
+            Cada operação do dia a dia repensada como uma experiência visual, rápida e intuitiva.
           </p>
         </div>
 

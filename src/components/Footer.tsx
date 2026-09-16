@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { scrollToId } from "../utils/scroll";
 
-type FooterLink = { label: string; to?: string };
+type FooterLink = { label: string; to: string };
 
 const columns: { title: string; links: FooterLink[] }[] = [
   {
@@ -47,7 +47,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-zinc-500">
-              O cliente Git visual feito por um dev, para devs. Commits, merges, rebase e cherry-picks — sem fricção.
+              O cliente Git visual feito por um dev, para devs. Commits, merges, rebase e cherry-picks — sem complicação.
             </p>
             <div className="mt-6 flex gap-3">
               {socials.map((s) => (
@@ -77,19 +77,13 @@ export default function Footer() {
               <ul className="mt-4 space-y-3">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    {link.to ? (
-                      <Link
-                        to={link.to}
-                        onClick={() => handleHash(link.to!)}
-                        className="text-sm text-zinc-500 transition hover:text-fuchsia-300"
-                      >
-                        {link.label}
-                      </Link>
-                    ) : (
-                      <a href="#" className="text-sm text-zinc-500 transition hover:text-fuchsia-300">
-                        {link.label}
-                      </a>
-                    )}
+                    <Link
+                      to={link.to}
+                      onClick={() => handleHash(link.to)}
+                      className="text-sm text-zinc-500 transition hover:text-fuchsia-300"
+                    >
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -97,9 +91,8 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-4 border-t border-white/10 py-8 text-xs text-zinc-600 sm:flex-row">
+        <div className="flex flex-col items-center gap-4 border-t border-white/10 py-8 text-xs text-zinc-600">
           <p>© {new Date().getFullYear()} Orchid Git. Feito com 💜 de dev, para dev.</p>
-          <p>Construído com React, Vite &amp; Tailwind CSS.</p>
         </div>
       </div>
     </footer>
