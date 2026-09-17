@@ -4,7 +4,7 @@ export default function About() {
   return (
     <Page
       title="Sobre o Orchid Git"
-      subtitle="O cliente Git visual feito por um dev, para devs."
+      subtitle="O cliente Git visual feito por um dev, para todos os devs."
     >
       <p>
         O Orchid Git nasceu de uma frustração simples: tarefas do dia a dia com Git costumam
