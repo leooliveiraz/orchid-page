@@ -39,7 +39,7 @@ export default function Comparison() {
         <div className="mx-auto max-w-2xl text-center">
           <span className="text-xs font-bold uppercase tracking-[0.2em] text-fuchsia-400">Por que Orchid</span>
           <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-            Feito por um dev cansado de clientes Git genéricos.
+            Feito por um dev que queria um Git mais simples
           </h2>
           <p className="mt-4 text-lg text-zinc-400">
             Orchid Git nasceu da frustração do dia a dia — e resolve exatamente o que outros deixam pra trás.

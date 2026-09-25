@@ -1,5 +1,3 @@
-import GraphMockup from "./GraphMockup";
-
 const stars = Array.from({ length: 60 }, (_, i) => ({
   id: i,
   size: Math.random() * 2.5 + 1,
@@ -58,9 +56,8 @@ export default function Hero() {
           </h1>
 
           <p className="animate-fade-in-up mt-6 max-w-xl text-balance text-lg leading-relaxed text-zinc-400" style={{ animationDelay: "0.1s" }}>
-            Cansou de decorar comando de terminal? Orchid Git é o cliente visual que
-            transforma commits, merges, rebases e cherry-picks em <strong className="text-zinc-200">alguns cliques</strong>.
-            Seu fluxo de trabalho mais rápido — sem perder o foco.
+            Cansado de brigar com o terminal?
+            O Orchid Git transforma commits, merges, rebases e cherry-picks em uma experiência visual, simples e intuitiva.  <strong className="text-zinc-200">Menos comandos. Mais foco no que realmente importa.</strong>
           </p>
 
           <div className="animate-fade-in-up mt-9 flex flex-col items-center gap-4 sm:flex-row" style={{ animationDelay: "0.2s" }}>
@@ -96,11 +93,17 @@ export default function Hero() {
 
         </div>
 
-        {/* showcase mockup */}
+        {/* real app screenshot */}
         <div className="animate-fade-in-up relative mx-auto mt-16 max-w-5xl" style={{ animationDelay: "0.4s" }}>
           <div className="absolute -inset-6 rounded-[2rem] bg-gradient-to-r from-fuchsia-600/20 via-purple-600/10 to-indigo-600/20 blur-2xl" />
           <div className="animate-float relative">
-            <GraphMockup />
+            <img
+              src="/images/screenshots/graph.png"
+              alt="Grafo de commits do Orchid Git"
+              width={2142}
+              height={1298}
+              className="w-full rounded-2xl border border-white/10 shadow-2xl shadow-fuchsia-900/30"
+            />
           </div>
         </div>
       </div>

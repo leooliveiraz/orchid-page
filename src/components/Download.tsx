@@ -1,7 +1,7 @@
 import { useEffect, useState, type ComponentType } from "react";
 import { DebianIcon, FedoraIcon, RedHatIcon, UbuntuIcon, WindowsIcon, type IconProps } from "./Icons";
 
-const LATEST_VERSION = "v0.9.8";
+const LATEST_VERSION = "v0.9.12";
 const RELEASES_URL = "https://github.com/leooliveiraz/orchid-page/releases";
 const LATEST_DOWNLOAD_URL = `${RELEASES_URL}/latest/download`;
 
@@ -84,14 +84,14 @@ export default function Download() {
               🌸 {LATEST_VERSION} — lançamento oficial
             </span>
             <h2 className="mx-auto mt-6 max-w-2xl text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
-              Chega de sofrer no terminal. 💔
+              Chega de sofrer com o Git.
               <span className="block bg-gradient-to-r from-fuchsia-300 via-purple-300 to-indigo-300 bg-clip-text text-transparent">
-                Vem pro Orchid. 🚀
+                Vem pro Orchid.
               </span>
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-lg text-zinc-300">
-              Gratuito, leve e feito por um dev que também ficava perdendo cabelo com Git.
-              Testa que você não vai querer voltar atrás. 💜
+              Gratuito, leve e sem complicação 💜
+              O Orchid nasceu para tornar o Git mais simples — experimente e veja a diferença no seu fluxo.
             </p>
 
             <div className="mt-10 flex flex-wrap justify-center gap-4">
@@ -129,7 +129,6 @@ export default function Download() {
             <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs text-zinc-500">
               <span className="flex items-center gap-1.5">🔓 Sem cartão de crédito</span>
               <span className="flex items-center gap-1.5">👤 Sem criar conta</span>
-              <span className="flex items-center gap-1.5">📦 Apenas ~15MB</span>
               <span className="flex items-center gap-1.5">🌸 Mantido com carinho</span>
             </div>
           </div>

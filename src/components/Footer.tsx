@@ -47,7 +47,8 @@ export default function Footer() {
               </span>
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-zinc-500">
-              O cliente Git visual feito por um dev, para todos os devs. Commits, merges, rebase e cherry-picks — sem complicação.
+              <strong>Git, do jeito que deveria ser.</strong><br></br>
+              Uma experiência visual e simples para commits, merges, rebase, cherry-picks e muito mais.
             </p>
             <div className="mt-6 flex gap-3">
               {socials.map((s) => (

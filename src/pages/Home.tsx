@@ -1,14 +1,15 @@
 import Hero from "../components/Hero";
 import Features from "../components/Features";
 import Workflow from "../components/Workflow";
+import Screenshots from "../components/Screenshots";
 import Comparison from "../components/Comparison";
 import Donation from "../components/Donation";
 import Download from "../components/Download";
 
 const stats = [
-  { value: "10x", label: "mais rápido em operações complexas" },
-  { value: "100%", label: "gratuito" },
-  { value: "0", label: "comandos decorados de cor" },
+  { value: "10x", label: "Mais agilidade no seu fluxo Git" },
+  { value: "100%", label: "Gratuito para usar" },
+  { value: "0", label: "Comandos para decorar" },
 ];
 
 function StatsBar() {
@@ -35,6 +36,7 @@ export default function Home() {
       <StatsBar />
       <Features />
       <Workflow />
+      <Screenshots />
       <Comparison />
       <Donation />
       <Download />
