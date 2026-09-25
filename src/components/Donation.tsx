@@ -39,8 +39,15 @@ export default function Donation() {
           <div className="relative grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
             {/* Left: message + where the money goes */}
             <div className="text-center lg:text-left">
-              <span className="inline-flex animate-pulse items-center gap-2 rounded-full border border-fuchsia-400/30 bg-fuchsia-500/10 px-4 py-1.5 text-xs font-bold text-fuchsia-300">
-                💜 Apoie o projeto
+              <span className="relative inline-flex items-center">
+                <span
+                  aria-hidden="true"
+                  className="animate-pulse-glow absolute -inset-1 rounded-full bg-gradient-to-r from-fuchsia-500 via-purple-500 to-indigo-500 opacity-70 blur-md"
+                />
+                <span className="relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-fuchsia-500 via-purple-500 to-indigo-500 px-4 py-1.5 text-xs font-bold text-white shadow-lg shadow-fuchsia-500/50 ring-1 ring-white/25">
+                  <span aria-hidden="true" className="animate-shimmer pointer-events-none absolute inset-0" />
+                  <span className="relative">💜 Apoie o projeto</span>
+                </span>
               </span>
               <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
                 Gostou do Orchid Git?
