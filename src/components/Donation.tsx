@@ -53,9 +53,9 @@ export default function Donation() {
                 Gostou do Orchid Git?
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-zinc-300">
-                Ele é <strong className="text-white">100% gratuito</strong> e vai continuar sendo.
+                Ele é <strong className="text-white">100% gratuito</strong>.
                 Mas se ele te salvou de um rebase cabeludo ou te fez mais produtivo,
-                <strong className="text-fuchsia-300"> considere fazer uma doação</strong>.
+                <strong className="text-fuchsia-300"> faça uma doação</strong>.
                 Qualquer valor ajuda a manter o projeto vivo! 🌸
               </p>
 

@@ -32,10 +32,9 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-0 bg-grid [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,black_10%,transparent_75%)]" />
       <div className="pointer-events-none absolute left-1/2 top-[-10%] h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-fuchsia-600/20 blur-[120px]" />
       <div className="pointer-events-none absolute right-[-10%] top-[20%] h-[400px] w-[400px] rounded-full bg-purple-600/20 blur-[100px]" />
-      <img
-        src="/images/orchid-glow.png"
-        alt=""
-        className="animate-float-slow pointer-events-none absolute -right-24 top-10 hidden w-[420px] opacity-40 mix-blend-screen lg:block"
+      <div
+        aria-hidden="true"
+        className="hero-glow animate-float-slow pointer-events-none absolute -right-24 top-10 hidden h-[230px] w-[420px] opacity-40 mix-blend-screen lg:block"
       />
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
@@ -50,8 +49,11 @@ export default function Hero() {
 
           <h1 className="animate-fade-in-up text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-6xl">
             Usar o Git nunca foi
-            <span className="block bg-gradient-to-r from-fuchsia-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent">
-              tão fácil ✨
+            <span className="block">
+              <span className="bg-gradient-to-r from-fuchsia-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent">
+                tão fácil
+              </span>{" "}
+              ✨
             </span>
           </h1>
 

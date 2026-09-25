@@ -143,6 +143,13 @@ body {
   background-size: 44px 44px;
 }
 
+.hero-glow {
+  background-image: url("/images/orchid-glow-sm.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 .stagger-1 { animation-delay: 0.05s; }
 .stagger-2 { animation-delay: 0.1s; }
 .stagger-3 { animation-delay: 0.15s; }

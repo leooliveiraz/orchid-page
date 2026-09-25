@@ -9,12 +9,14 @@ const links = [
   { label: "Download", to: "/#download" },
 ];
 
+const pageLinks = [{ label: "Sobre", to: "/sobre" }];
+
 function OrchidMark({ className = "h-10 w-10" }: { className?: string }) {
   return (
     <div
       className={`relative flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-fuchsia-500 via-purple-500 to-indigo-600 p-1.5 shadow-lg shadow-fuchsia-500/30 ${className}`}
     >
-      <img src="/images/icon.png" alt="Orchid Git" className="h-full w-full object-cover" />
+      <img src="/images/logo-128.png" alt="Orchid Git" className="h-full w-full object-cover" />
     </div>
   );
 }
@@ -80,7 +82,7 @@ export default function Navbar() {
         style={{ transform: `scaleX(${progress})` }}
         aria-hidden="true"
       />
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
+      <nav aria-label="Navegação principal" className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
         <Link to="/" className="flex items-center gap-3" onClick={() => handleNav("/#top")}>
           <OrchidMark />
           <span className="text-lg font-extrabold tracking-tight text-white">
@@ -97,6 +99,18 @@ export default function Navbar() {
               aria-current={active === link.to ? "true" : undefined}
               className={`text-sm font-medium transition ${
                 active === link.to ? "text-white" : "text-zinc-400 hover:text-white"
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
+          {pageLinks.map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              aria-current={pathname === link.to ? "page" : undefined}
+              className={`text-sm font-medium transition ${
+                pathname === link.to ? "text-white" : "text-zinc-400 hover:text-white"
               }`}
             >
               {link.label}
@@ -142,6 +156,19 @@ export default function Navbar() {
                 aria-current={active === link.to ? "true" : undefined}
                 className={`text-sm font-medium ${
                   active === link.to ? "text-white" : "text-zinc-300 hover:text-white"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+            {pageLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                onClick={() => setOpen(false)}
+                aria-current={pathname === link.to ? "page" : undefined}
+                className={`text-sm font-medium ${
+                  pathname === link.to ? "text-white" : "text-zinc-300 hover:text-white"
                 }`}
               >
                 {link.label}
