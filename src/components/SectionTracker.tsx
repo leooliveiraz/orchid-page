@@ -21,8 +21,8 @@ export default function SectionTracker() {
   useEffect(() => {
     if (typeof IntersectionObserver === "undefined") return;
 
-    const active: Record<string, number> = {};
-    const totals: Record<string, number> = {};
+    let active: Record<string, number> = {};
+    let totals: Record<string, number> = {};
 
     const flush = () => {
       const now = Date.now();
@@ -56,16 +56,26 @@ export default function SectionTracker() {
       { threshold: 0.25 },
     );
 
-    Array.from(document.querySelectorAll("[data-analytics-section]")).forEach((el) =>
-      observer.observe(el),
-    );
+    const observeAll = () =>
+      Array.from(document.querySelectorAll("[data-analytics-section]")).forEach((el) =>
+        observer.observe(el),
+      );
 
+    const onConsent = () => {
+      active = {};
+      totals = {};
+      observer.disconnect();
+      observeAll();
+    };
+
+    observeAll();
     const interval = window.setInterval(flush, FLUSH_INTERVAL_MS);
     const onVisibility = () => {
       if (document.visibilityState === "hidden") flush();
     };
     document.addEventListener("visibilitychange", onVisibility);
     window.addEventListener("pagehide", flush);
+    window.addEventListener("analytics-consent", onConsent);
 
     return () => {
       flush();
@@ -73,6 +83,7 @@ export default function SectionTracker() {
       window.clearInterval(interval);
       document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("pagehide", flush);
+      window.removeEventListener("analytics-consent", onConsent);
     };
   }, [pathname]);
 

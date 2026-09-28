@@ -2,7 +2,7 @@ import { hasConsent } from "./utils/consent";
 
 const LOGLY_SITE_ID = "orchidgit-com";
 const SITE_ANALYTICS_KEY = "ak_TaZlp1am1NrJtxPo9glMkVlzFF9gT5L0VZnf5ZZkI98";
-const SITE_ANALYTICS_SRC = "http://164.163.11.12/js/analytics.js";
+const SITE_ANALYTICS_SRC = "https://analytics.orchidgit.com/js/analytics.js";
 
 export function initAnalytics(): void {
   if (!import.meta.env.PROD) return;
@@ -13,6 +13,7 @@ export function applyConsent(granted: boolean): void {
   if (!import.meta.env.PROD || !granted) return;
   initSiteAnalytics();
   initLogly();
+  window.dispatchEvent(new Event("analytics-consent"));
 }
 
 function initSiteAnalytics(): void {
