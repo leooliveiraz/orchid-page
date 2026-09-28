@@ -1,7 +1,7 @@
 import { hasConsent } from "./utils/consent";
 
 const LOGLY_SITE_ID = "orchidgit-com";
-const SITE_ANALYTICS_KEY = "ak_TaZlp1am1NrJtxPo9glMkVlzFF9gT5L0VZnf5ZZkI98";
+const SITE_ANALYTICS_KEY = "ak_udIGQpIDm5AyyaVphqlAlBFWiYNmKIOT0QVNFOj989g";
 const SITE_ANALYTICS_SRC = "https://analytics.orchidgit.com/js/analytics.js";
 
 export function initAnalytics(): void {
