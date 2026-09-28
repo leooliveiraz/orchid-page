@@ -1,11 +1,11 @@
 const LOGLY_SITE_ID = "orchidgit-com";
-const SITE_ANALYTICS_KEY = "ak_5tSt5gI_E3jEKA_P87YjY8dQRwMDyoIeMf3BbCmKROA";
-const SITE_ANALYTICS_SRC = "http://164.163.11.12/js/analytics.js";
+const SITE_ANALYTICS_KEY = "ak_aU_Vuszxa1b5ulQk19e_4BMrVKNCQyrHTXqfU4Vg9WM";
+const SITE_ANALYTICS_SRC = "https://analytics.orchidgit.com/js/analytics.js";
 
 export function initAnalytics() {
-  initSiteAnalytics();
   if (!import.meta.env.PROD) return;
   initLogly();
+  initSiteAnalytics();
 }
 
 function initSiteAnalytics() {
