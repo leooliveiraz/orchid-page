@@ -34,7 +34,7 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-white/10 bg-black/40 pt-16">
+    <footer data-analytics-section="footer" className="relative border-t border-white/10 bg-black/40 pt-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 pb-12 sm:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
@@ -55,6 +55,7 @@ export default function Footer() {
                 <a
                   key={s.name}
                   href={s.href}
+                  data-analytics={`footer_social_${s.name}`}
                   className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-zinc-400 transition hover:border-fuchsia-400/40 hover:text-fuchsia-300"
                   aria-label={s.label}
                   {...(s.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
@@ -65,6 +66,7 @@ export default function Footer() {
             </div>
             <a
               href="mailto:contact@orchidgit.com"
+              data-analytics="footer_email"
               className="mt-6 inline-flex items-center gap-2 text-sm text-zinc-400 transition hover:text-fuchsia-300"
             >
               <MailIcon />
@@ -81,6 +83,7 @@ export default function Footer() {
                     <Link
                       to={link.to}
                       onClick={() => handleHash(link.to)}
+                      data-analytics={`footer_${link.label.toLowerCase().replace(/\s+/g, "_")}`}
                       className="text-sm text-zinc-500 transition hover:text-fuchsia-300"
                     >
                       {link.label}

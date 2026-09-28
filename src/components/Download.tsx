@@ -1,5 +1,6 @@
 import { useEffect, useState, type ComponentType } from "react";
 import { DebianIcon, FedoraIcon, RedHatIcon, UbuntuIcon, WindowsIcon, type IconProps } from "./Icons";
+import { track } from "../utils/track";
 
 const LATEST_VERSION = "v0.9.12";
 const RELEASES_URL = "https://github.com/leooliveiraz/orchid-page/releases";
@@ -73,7 +74,7 @@ export default function Download() {
     : platforms;
 
   return (
-    <section id="download" className="relative py-28">
+    <section id="download" data-analytics-section="download" className="relative py-28">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-gradient-to-br from-fuchsia-600/20 via-purple-700/20 to-indigo-800/20 px-6 py-16 text-center sm:px-16">
           <div className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-fuchsia-500/30 blur-[100px]" />
@@ -102,6 +103,14 @@ export default function Download() {
                   <a
                     key={p.name}
                     href={p.url}
+                    onClick={() =>
+                      track("download_click", {
+                        platform: p.name,
+                        os: p.os,
+                        recommended,
+                        version: LATEST_VERSION,
+                      })
+                    }
                     className={`group animate-fade-in-up relative flex w-52 flex-col items-center gap-3 rounded-2xl border px-6 py-6 text-left opacity-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-fuchsia-500/20 ${
                       recommended
                         ? "border-fuchsia-400/60 bg-fuchsia-500/10 hover:border-fuchsia-300/70"

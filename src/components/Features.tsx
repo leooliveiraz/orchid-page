@@ -72,7 +72,7 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="recursos" className="relative py-28">
+    <section id="recursos" data-analytics-section="recursos" className="relative py-28">
       <div className="pointer-events-none absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">

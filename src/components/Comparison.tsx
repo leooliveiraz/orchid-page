@@ -33,7 +33,7 @@ function Cell({ value }: { value: boolean | string }) {
 
 export default function Comparison() {
   return (
-    <section id="comparativo" className="relative py-28">
+    <section id="comparativo" data-analytics-section="comparativo" className="relative py-28">
       <div className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-purple-700/10 blur-[120px]" />
       <div className="relative mx-auto max-w-5xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">

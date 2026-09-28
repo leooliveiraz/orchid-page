@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { track } from "../utils/track";
 
 const PIX_KEY = "b13ccfa8-b2b7-4bbd-94d3-e0c25ca2a76a";
 const PIX_BRCODE =
@@ -21,14 +22,16 @@ export default function Donation() {
     try {
       await navigator.clipboard.writeText(value);
       setCopied(kind);
+      track("donate_copy_success", { method: kind });
       setTimeout(() => setCopied(null), 2000);
     } catch {
+      track("donate_copy_error", { method: kind });
       setCopied(null);
     }
   }
 
   return (
-    <section className="relative py-28">
+    <section data-analytics-section="apoie" className="relative py-28">
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
         <div className="h-[500px] w-[500px] rounded-full bg-fuchsia-600/10 blur-[140px]" />
       </div>
@@ -81,7 +84,7 @@ export default function Donation() {
             {/* Right: donation methods */}
             <div className="space-y-4">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <button type="button" onClick={() => copy(PIX_KEY, "key")} className={cardClass}>
+                <button type="button" onClick={() => copy(PIX_KEY, "key")} data-analytics="donate_pix_card" className={cardClass}>
                   <div className="text-3xl transition duration-300 group-hover:scale-110">💸</div>
                   <p className="mt-3 text-sm font-bold text-white">PIX</p>
                   <p className="mt-1 text-xs text-zinc-300">
@@ -89,7 +92,7 @@ export default function Donation() {
                   </p>
                 </button>
 
-                <a href={BUY_ME_A_COFFEE_URL} target="_blank" rel="noreferrer" className={cardClass}>
+                <a href={BUY_ME_A_COFFEE_URL} target="_blank" rel="noreferrer" data-analytics="donate_buymeacoffee" className={cardClass}>
                   <div className="text-3xl transition duration-300 group-hover:scale-110">☕</div>
                   <p className="mt-3 text-sm font-bold text-white">Buy Me a Coffee</p>
                   <p className="mt-1 text-xs text-zinc-300">Cartão, PayPal e mais — internacional</p>
@@ -105,6 +108,7 @@ export default function Donation() {
                   <button
                     type="button"
                     onClick={() => copy(PIX_KEY, "key")}
+                    data-analytics="donate_pix_copy_key"
                     className="rounded-full bg-gradient-to-r from-fuchsia-500 to-purple-600 px-5 py-2 text-xs font-bold text-white shadow-lg shadow-fuchsia-500/25 transition hover:brightness-110"
                   >
                     {copied === "key" ? "✓ Chave copiada" : "Copiar chave PIX"}
@@ -112,6 +116,7 @@ export default function Donation() {
                   <button
                     type="button"
                     onClick={() => copy(PIX_BRCODE, "brcode")}
+                    data-analytics="donate_pix_copy_brcode"
                     className="rounded-full border border-white/15 bg-white/5 px-5 py-2 text-xs font-bold text-white transition hover:border-white/30 hover:bg-white/10"
                   >
                     {copied === "brcode" ? "✓ Código copiado" : "Copiar código copia e cola"}

@@ -122,7 +122,7 @@ export default function Workflow() {
   const current = steps.find((s) => s.id === active)!;
 
   return (
-    <section id="fluxo" className="relative py-28">
+    <section id="fluxo" data-analytics-section="fluxo" className="relative py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <span className="text-xs font-bold uppercase tracking-[0.2em] text-fuchsia-400">Fluxo de trabalho</span>
@@ -139,6 +139,7 @@ export default function Workflow() {
             <button
               key={s.id}
               onClick={() => setActive(s.id)}
+              data-analytics={`workflow_tab_${s.id}`}
               className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 ${
                 active === s.id
                   ? "scale-105 bg-gradient-to-r from-fuchsia-500 to-purple-600 text-white shadow-lg shadow-fuchsia-500/25"

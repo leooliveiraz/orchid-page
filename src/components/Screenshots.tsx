@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { track } from "../utils/track";
 
 const shots = [
   {
@@ -79,7 +80,7 @@ export default function Screenshots() {
   const current = openIndex === null ? null : shots[openIndex];
 
   return (
-    <section id="telas" className="relative py-28">
+    <section id="telas" data-analytics-section="telas" className="relative py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <span className="text-xs font-bold uppercase tracking-[0.2em] text-fuchsia-400">Por dentro</span>
@@ -99,7 +100,10 @@ export default function Screenshots() {
             >
               <button
                 type="button"
-                onClick={() => setOpenIndex(i)}
+                onClick={() => {
+                  setOpenIndex(i);
+                  track("screenshot_open", { title: s.title, index: i });
+                }}
                 aria-label={`Ampliar imagem: ${s.title}`}
                 className="block w-full cursor-zoom-in"
               >
@@ -131,7 +135,10 @@ export default function Screenshots() {
         >
           <button
             type="button"
-            onClick={close}
+            onClick={() => {
+              track("screenshot_close", { title: current.title, index: openIndex ?? 0 });
+              close();
+            }}
             aria-label="Fechar"
             className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/50 text-white transition hover:bg-white/10"
           >
@@ -144,6 +151,7 @@ export default function Screenshots() {
             type="button"
             onClick={(e) => {
               e.stopPropagation();
+              track("screenshot_nav", { direction: "prev", title: current.title, index: openIndex ?? 0 });
               step(-1);
             }}
             aria-label="Imagem anterior"
@@ -158,6 +166,7 @@ export default function Screenshots() {
             type="button"
             onClick={(e) => {
               e.stopPropagation();
+              track("screenshot_nav", { direction: "next", title: current.title, index: openIndex ?? 0 });
               step(1);
             }}
             aria-label="Próxima imagem"

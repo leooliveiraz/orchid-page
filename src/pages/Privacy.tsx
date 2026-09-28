@@ -2,7 +2,7 @@ import Page from "../components/Page";
 
 export default function Privacy() {
   return (
-    <Page title="Privacidade" subtitle="Como o Orchid Git trata seus dados.">
+    <Page title="Privacidade" section="privacidade" subtitle="Como o Orchid Git trata seus dados.">
       <p>
         Esta política descreve como este site (orchidgit.com) trata informações. A ideia é
         simples: coletamos o mínimo possível — de preferência, nada que identifique você.
@@ -35,6 +35,7 @@ export default function Privacy() {
             href="https://logly.uk/privacy"
             target="_blank"
             rel="noopener noreferrer"
+            data-analytics="privacy_logly"
             className="text-fuchsia-300 underline-offset-4 hover:underline"
           >
             política de privacidade do Logly
@@ -49,6 +50,7 @@ export default function Privacy() {
           Não há formulários nem cadastro neste site. Se você entrar em contato pelo e-mail{" "}
           <a
             href="mailto:contact@orchidgit.com"
+            data-analytics="privacy_email"
             className="text-fuchsia-300 underline-offset-4 hover:underline"
           >
             contact@orchidgit.com
@@ -81,6 +83,7 @@ export default function Privacy() {
           Dúvidas sobre privacidade? Escreva para{" "}
           <a
             href="mailto:contact@orchidgit.com"
+            data-analytics="privacy_email"
             className="text-fuchsia-300 underline-offset-4 hover:underline"
           >
             contact@orchidgit.com

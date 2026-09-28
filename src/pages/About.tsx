@@ -4,6 +4,7 @@ export default function About() {
   return (
     <Page
       title="Sobre o Orchid Git"
+      section="sobre"
       subtitle="O cliente Git visual feito por um dev, para todos os devs."
     >
       <p>

@@ -17,12 +17,13 @@ const channels = [
 
 export default function Contact() {
   return (
-    <Page title="Contato" subtitle="Dúvidas, sugestões, bugs ou imprensa? Escolha o canal.">
+    <Page title="Contato" section="contato" subtitle="Dúvidas, sugestões, bugs ou imprensa? Escolha o canal.">
       <div className="grid gap-4 sm:grid-cols-2">
         {channels.map((c) => (
           <a
             key={c.label}
             href={c.href}
+            data-analytics={`contact_${c.external ? "social" : "email"}`}
             {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             className="group rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-fuchsia-400/40 hover:bg-white/10"
           >

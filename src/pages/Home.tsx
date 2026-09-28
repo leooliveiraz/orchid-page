@@ -14,7 +14,7 @@ const stats = [
 
 function StatsBar() {
   return (
-    <section className="relative border-y border-white/10 bg-white/[0.02] py-12">
+    <section data-analytics-section="stats" className="relative border-y border-white/10 bg-white/[0.02] py-12">
       <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-6 lg:grid-cols-3 lg:px-8">
         {stats.map((s) => (
           <div key={s.label} className="text-center">

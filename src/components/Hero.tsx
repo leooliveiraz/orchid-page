@@ -9,7 +9,7 @@ const stars = Array.from({ length: 60 }, (_, i) => ({
 
 export default function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden pb-24 pt-36 lg:pt-44">
+    <section id="top" data-analytics-section="hero" className="relative overflow-hidden pb-24 pt-36 lg:pt-44">
       {/* animated stars */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         {stars.map((s) => (
@@ -65,6 +65,7 @@ export default function Hero() {
           <div className="animate-fade-in-up mt-9 flex flex-col items-center gap-4 sm:flex-row" style={{ animationDelay: "0.2s" }}>
             <a
               href="#download"
+              data-analytics="hero_cta_download"
               className="group relative flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-fuchsia-500 to-purple-600 px-7 py-3.5 text-sm font-bold text-white shadow-xl shadow-fuchsia-500/30 transition-all duration-300 hover:scale-105 hover:shadow-fuchsia-500/50 hover:brightness-110"
             >
               <span className="animate-shimmer pointer-events-none absolute inset-0" />
@@ -77,6 +78,7 @@ export default function Hero() {
             </a>
             <a
               href="#fluxo"
+              data-analytics="hero_cta_workflow"
               className="group flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-7 py-3.5 text-sm font-bold text-white backdrop-blur transition-all duration-300 hover:scale-105 hover:border-white/30 hover:bg-white/10"
             >
               <svg viewBox="0 0 24 24" className="h-4 w-4 transition group-hover:scale-110" fill="currentColor">

@@ -3,6 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import BackToTop from "./BackToTop";
+import SectionTracker from "./SectionTracker";
 import { scrollToId } from "../utils/scroll";
 
 function ScrollManager() {
@@ -24,6 +25,7 @@ export default function Layout() {
   return (
     <div className="min-h-screen bg-[#08070b] text-white antialiased selection:bg-fuchsia-500/30">
       <ScrollManager />
+      <SectionTracker />
       <Navbar />
       <main>
         <Outlet />

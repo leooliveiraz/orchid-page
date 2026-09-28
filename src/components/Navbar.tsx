@@ -83,7 +83,7 @@ export default function Navbar() {
         aria-hidden="true"
       />
       <nav aria-label="Navegação principal" className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-        <Link to="/" className="flex items-center gap-3" onClick={() => handleNav("/#top")}>
+        <Link to="/" className="flex items-center gap-3" onClick={() => handleNav("/#top")} data-analytics="nav_logo">
           <OrchidMark />
           <span className="text-lg font-extrabold tracking-tight text-white">
             Orchid <span className="text-fuchsia-400">Git</span>
@@ -97,6 +97,7 @@ export default function Navbar() {
               to={link.to}
               onClick={() => handleNav(link.to)}
               aria-current={active === link.to ? "true" : undefined}
+              data-analytics={`nav_${link.to.split("#")[1]}`}
               className={`text-sm font-medium transition ${
                 active === link.to ? "text-white" : "text-zinc-400 hover:text-white"
               }`}
@@ -109,6 +110,7 @@ export default function Navbar() {
               key={link.to}
               to={link.to}
               aria-current={pathname === link.to ? "page" : undefined}
+              data-analytics={`nav_${link.to.replace(/\//g, "")}`}
               className={`text-sm font-medium transition ${
                 pathname === link.to ? "text-white" : "text-zinc-400 hover:text-white"
               }`}
@@ -122,6 +124,7 @@ export default function Navbar() {
           <Link
             to="/#download"
             onClick={() => handleNav("/#download")}
+            data-analytics="nav_cta_download"
             className="rounded-full bg-gradient-to-r from-fuchsia-500 to-purple-600 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-fuchsia-500/25 transition hover:shadow-fuchsia-500/40 hover:brightness-110"
           >
             Baixar grátis
@@ -130,6 +133,7 @@ export default function Navbar() {
 
         <button
           onClick={() => setOpen((v) => !v)}
+          data-analytics="nav_mobile_toggle"
           className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-white lg:hidden"
           aria-label={open ? "Fechar menu" : "Abrir menu"}
           aria-expanded={open}
@@ -154,6 +158,7 @@ export default function Navbar() {
                 to={link.to}
                 onClick={() => handleNav(link.to)}
                 aria-current={active === link.to ? "true" : undefined}
+                data-analytics={`nav_${link.to.split("#")[1]}`}
                 className={`text-sm font-medium ${
                   active === link.to ? "text-white" : "text-zinc-300 hover:text-white"
                 }`}
@@ -167,6 +172,7 @@ export default function Navbar() {
                 to={link.to}
                 onClick={() => setOpen(false)}
                 aria-current={pathname === link.to ? "page" : undefined}
+                data-analytics={`nav_${link.to.replace(/\//g, "")}`}
                 className={`text-sm font-medium ${
                   pathname === link.to ? "text-white" : "text-zinc-300 hover:text-white"
                 }`}
@@ -177,6 +183,7 @@ export default function Navbar() {
             <Link
               to="/#download"
               onClick={() => handleNav("/#download")}
+              data-analytics="nav_cta_download"
               className="mt-2 rounded-full bg-gradient-to-r from-fuchsia-500 to-purple-600 px-5 py-2.5 text-center text-sm font-semibold text-white"
             >
               Baixar grátis
