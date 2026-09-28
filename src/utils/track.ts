@@ -8,7 +8,42 @@ declare global {
   }
 }
 
+type PendingEvent = { name: string; properties?: AnalyticsProperties };
+
+const pending: PendingEvent[] = [];
+let pollTimer: number | undefined;
+
+function deliver(): boolean {
+  const analytics = window.analytics;
+  if (!analytics || typeof analytics.track !== "function") return false;
+  while (pending.length > 0) {
+    const event = pending.shift()!;
+    analytics.track(event.name, event.properties);
+  }
+  return true;
+}
+
+function startPolling(): void {
+  if (pollTimer !== undefined) return;
+  let attempts = 0;
+  pollTimer = window.setInterval(() => {
+    attempts += 1;
+    if (deliver() || attempts >= 40) {
+      window.clearInterval(pollTimer);
+      pollTimer = undefined;
+    }
+  }, 250);
+}
+
 export function track(name: string, properties?: AnalyticsProperties): void {
   if (typeof window === "undefined") return;
-  window.analytics?.track?.(name, properties);
+
+  const analytics = window.analytics;
+  if (analytics && typeof analytics.track === "function") {
+    analytics.track(name, properties);
+    return;
+  }
+
+  pending.push({ name, properties });
+  startPolling();
 }
