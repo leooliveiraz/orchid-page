@@ -1,3 +1,5 @@
+import { hasConsent } from "./consent";
+
 type AnalyticsProperties = Record<string, unknown>;
 
 declare global {
@@ -14,6 +16,10 @@ const pending: PendingEvent[] = [];
 let pollTimer: number | undefined;
 
 function deliver(): boolean {
+  if (!hasConsent()) {
+    pending.length = 0;
+    return true;
+  }
   const analytics = window.analytics;
   if (!analytics || typeof analytics.track !== "function") return false;
   while (pending.length > 0) {
@@ -37,6 +43,7 @@ function startPolling(): void {
 
 export function track(name: string, properties?: AnalyticsProperties): void {
   if (typeof window === "undefined") return;
+  if (!hasConsent()) return;
 
   const analytics = window.analytics;
   if (analytics && typeof analytics.track === "function") {

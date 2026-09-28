@@ -1,14 +1,21 @@
-const LOGLY_SITE_ID = "orchidgit-com";
-const SITE_ANALYTICS_KEY = "ak_aU_Vuszxa1b5ulQk19e_4BMrVKNCQyrHTXqfU4Vg9WM";
-const SITE_ANALYTICS_SRC = "https://analytics.orchidgit.com/js/analytics.js";
+import { hasConsent } from "./utils/consent";
 
-export function initAnalytics() {
+const LOGLY_SITE_ID = "orchidgit-com";
+const SITE_ANALYTICS_KEY = "ak_TaZlp1am1NrJtxPo9glMkVlzFF9gT5L0VZnf5ZZkI98";
+const SITE_ANALYTICS_SRC = "http://164.163.11.12/js/analytics.js";
+
+export function initAnalytics(): void {
   if (!import.meta.env.PROD) return;
-  initLogly();
-  initSiteAnalytics();
+  applyConsent(hasConsent());
 }
 
-function initSiteAnalytics() {
+export function applyConsent(granted: boolean): void {
+  if (!import.meta.env.PROD || !granted) return;
+  initSiteAnalytics();
+  initLogly();
+}
+
+function initSiteAnalytics(): void {
   if (document.querySelector("script[data-key]")) return;
 
   const script = document.createElement("script");
@@ -24,7 +31,7 @@ function initSiteAnalytics() {
   document.head.appendChild(script);
 }
 
-function initLogly() {
+function initLogly(): void {
   if (document.querySelector("script[data-site]")) return;
 
   const script = document.createElement("script");

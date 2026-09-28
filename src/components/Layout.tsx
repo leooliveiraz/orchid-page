@@ -3,6 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import BackToTop from "./BackToTop";
+import ConsentBanner from "./ConsentBanner";
 import SectionTracker from "./SectionTracker";
 import { scrollToId } from "../utils/scroll";
 
@@ -32,6 +33,7 @@ export default function Layout() {
       </main>
       <Footer />
       <BackToTop />
+      <ConsentBanner />
     </div>
   );
 }
