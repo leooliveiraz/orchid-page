@@ -1,17 +1,17 @@
 import { useEffect, useState, type ComponentType } from "react";
 import { DebianIcon, FedoraIcon, RedHatIcon, UbuntuIcon, WindowsIcon, type IconProps } from "./Icons";
 import { track } from "../utils/track";
+import { fetchDownloadLinks, staticLinks, type DownloadLinks } from "../utils/releases";
 
-const LATEST_VERSION = "v0.9.12";
-const RELEASES_URL = "https://github.com/leooliveiraz/orchid-page/releases";
-const LATEST_DOWNLOAD_URL = `${RELEASES_URL}/latest/download`;
+const FALLBACK_VERSION = "v0.9.17";
 
 type PlatformOS = "windows" | "linux";
+type DownloadKey = keyof Pick<DownloadLinks, "windows" | "deb" | "rpm">;
 
 type Platform = {
+  key: DownloadKey;
   name: string;
   detail: string;
-  url: string;
   os: PlatformOS;
   icon: ComponentType<IconProps>;
   swapWith?: ComponentType<IconProps>;
@@ -19,24 +19,24 @@ type Platform = {
 
 const platforms: Platform[] = [
   {
+    key: "windows",
     name: "Windows",
     detail: ".exe · instalador",
-    url: `${LATEST_DOWNLOAD_URL}/Orchid-Git-Setup.exe`,
     os: "windows",
     icon: WindowsIcon,
   },
   {
+    key: "deb",
     name: "Linux · deb",
     detail: "Debian, Ubuntu e derivados",
-    url: `${LATEST_DOWNLOAD_URL}/orchid-git-amd64.deb`,
     os: "linux",
     icon: DebianIcon,
     swapWith: UbuntuIcon,
   },
   {
+    key: "rpm",
     name: "Linux · rpm",
     detail: "Fedora, RHEL e derivados",
-    url: `${LATEST_DOWNLOAD_URL}/orchid-git-x86_64.rpm`,
     os: "linux",
     icon: FedoraIcon,
     swapWith: RedHatIcon,
@@ -64,9 +64,20 @@ function detectOS(): PlatformOS | null {
 
 export default function Download() {
   const [os, setOs] = useState<PlatformOS | null>(null);
+  const [links, setLinks] = useState<DownloadLinks>(() => staticLinks(FALLBACK_VERSION));
 
   useEffect(() => {
     setOs(detectOS());
+  }, []);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetchDownloadLinks(controller.signal)
+      .then((resolved) => {
+        if (resolved) setLinks(resolved);
+      })
+      .catch(() => {});
+    return () => controller.abort();
   }, []);
 
   const orderedPlatforms = os
@@ -82,7 +93,7 @@ export default function Download() {
 
           <div className="relative">
             <span className="animate-pulse-glow inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/20 px-4 py-1.5 text-xs font-bold text-fuchsia-300">
-              🌸 {LATEST_VERSION} — lançamento oficial
+              🌸 {links.version} — lançamento oficial
             </span>
             <h2 className="mx-auto mt-6 max-w-2xl text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
               Chega de sofrer com o Git.
@@ -102,13 +113,13 @@ export default function Download() {
                 return (
                   <a
                     key={p.name}
-                    href={p.url}
+                    href={links[p.key]}
                     onClick={() =>
                       track("download_click", {
                         platform: p.name,
                         os: p.os,
                         recommended,
-                        version: LATEST_VERSION,
+                        version: links.version,
                       })
                     }
                     className={`group animate-fade-in-up relative flex w-52 flex-col items-center gap-3 rounded-2xl border px-6 py-6 text-left opacity-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-fuchsia-500/20 ${
